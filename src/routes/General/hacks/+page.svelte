@@ -76,7 +76,7 @@
             <li>
                 <a href={site.url} class="link">{site.name}</a>
                 {#if site.description}
-                    <br><span class="text">{site.description}</span>
+                    <br><span class="text-note">{site.description}</span>
                 {/if}
             </li>
         {/each}
