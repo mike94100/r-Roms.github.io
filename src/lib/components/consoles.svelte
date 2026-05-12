@@ -18,9 +18,9 @@
         encrypted: boolean
     };
 
-    const GameBoyAdvance: Console = { manufacturer: "Nintendo", name: "Game Boy Advance", emulators: [], fileTypes: []}
+    const ConsoleGBA: Console = { manufacturer: "Nintendo", name: "Game Boy Advance", emulators: [], fileTypes: []}
 
-    const EmuMGBA: Emulator = { name: "mGBA", platforms: ["Windows", "MacOS", "Linux", "Android", "iOS via RetroArch"]}
+    const EmulatorMGBA: Emulator = { name: "mGBA", platforms: ["Windows", "MacOS", "Linux", "Android", "iOS via RetroArch"]}
 
     const FileGBA: FileType = { name: "gba", compressed: false, encrypted: false}
     const FileZIP: FileType = { name: "zip", compressed: true, encrypted: false}

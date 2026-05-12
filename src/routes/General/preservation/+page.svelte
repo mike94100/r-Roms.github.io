@@ -8,12 +8,108 @@
         TableHeader,
         TableRow,
     } from "$lib/components/ui/table/index.js";
+
+    interface Sites {
+        name: string;
+        url: string;
+        description?: string;
+    }
+
+    const heading: String[] = [
+        "Name",
+        "Description"
+    ]
+
+    const databases: Sites[] = [
+        {
+            name: "No-Intro",
+            url: "https://no-intro.org",
+            description: "Catalogs accurate file hashes for flash media"
+        },
+        {
+            name: "Redump",
+            url: "http://redump.org",
+            description: "Catalogs accurate file hashes for optical media"
+        },
+        {
+            name: "TOSEC",
+            url: "https://www.tosecdev.org",
+            description: "Catalogs accurate file hashes for flash media " +
+            "(TOSEC), optical media (TOSEC-ISO), and auxiliary resources " +
+            "(TOSEC-PIX)"
+        },
+        {
+            name: "Hasheous",
+            url: "https://hasheous.org",
+            description: "Catalogs ROM hashes and matches those hashes with " +
+            "metadata providers"
+        },
+        {
+            name: "IGDB",
+            url: "https://www.igdb.com",
+            description: "Metadata and media for games"
+        },
+        {
+            name: "Screenscraper",
+            url: "https://www.screenscraper.fr",
+            description: "Visual (Image & Video) media"
+        },
+        {
+            name: "RetroAchievements",
+            url: "https://retroachievements.org",
+            description: "Retro game achievements"
+        },
+        {
+            name: "SteamGridDB",
+            url: "https://www.steamgriddb.com",
+            description: "Images for front-end presentation"
+        },
+        {
+            name: "HowLongToBeat",
+            url: "https://howlongtobeat.com",
+            description: "Game & playtime tracking"
+        },
+    ]
+
+    const hashers: Sites[] = [
+        {
+            name: "emn178's Online Tools",
+            url: "https://emn178.github.io/online-tools/md5_checksum.html",
+        },
+    ]
 </script>
+
+{#snippet table(items: Sites[])}
+<div class="table-container">
+    <Table>
+        <TableHeader>
+            <TableRow>
+                {#each heading as h}
+                    <TableHead>{h}</TableHead>
+                {/each}
+            </TableRow>
+        </TableHeader>
+        <TableBody>
+            {#each items as item}
+                <TableRow>
+                    <TableCell>
+                        <a href={item.url} class="link">{item.name}</a>
+                    </TableCell>
+                    <TableCell>{item.description}</TableCell>
+                </TableRow>
+            {/each}
+        </TableBody>
+    </Table>
+</div>
+{/snippet}
 
 <!-- Home page for the ROMs megathread -->
 <div class="page-container">
     <h1 class="header1">
-        Preservation Databases
+        Preservation
+    </h1>
+    <h1 class="header2">
+        Databases
     </h1>
     <p class="text">
         Many online groups serve to aggregate accurate information related to
@@ -21,108 +117,48 @@
         ensure users can verify files for emulation and provide various types
         of metadata and media for presentation.
     </p>
-       <div class="table-container">
-        <Table>
-            <TableHeader>
-                <TableRow>
-                    <TableHead>Database</TableHead>
-                    <TableHead>Purpose</TableHead>
-                </TableRow>
-            </TableHeader>
-            <TableBody>
-                <TableRow>
-                    <TableCell>
-                        <a
-                            href="https://no-intro.org"
-                            class="link"
-                            >No-Intro</a
-                        >
-                    </TableCell>
-                    <TableCell>Catalogs accurate file hashes for flash media</TableCell>
-                </TableRow>
-                <TableRow>
-                    <TableCell>
-                        <a
-                            href="http://redump.org"
-                            class="link"
-                            >Redump</a
-                        >
-                    </TableCell>
-                    <TableCell>Catalogs accurate file hashes for optical media</TableCell>
-                </TableRow>
-                <TableRow>
-                    <TableCell>
-                        <a
-                            href="https://www.tosecdev.org"
-                            class="link"
-                            >TOSEC</a
-                        >
-                    </TableCell>
-                    <TableCell>Catalogs accurate file hashes for flash media (TOSEC)
-                        , optical media (TOSEC-ISO)
-                        , and auxiliary resources (TOSEC-PIX)</TableCell>
-                </TableRow>
-                <TableRow>
-                    <TableCell>
-                        <a
-                            href="https://hasheous.org"
-                            class="link"
-                            >Hasheous</a
-                        >
-                    </TableCell>
-                    <TableCell>Catalogs ROM hashes and matches those hashes with metadata providers</TableCell>
-                </TableRow>
-                <TableRow>
-                    <TableCell>
-                        <a
-                            href="https://www.igdb.com"
-                            class="link"
-                            >IGDB</a
-                        >
-                    </TableCell>
-                    <TableCell>Metadata and media for games</TableCell>
-                </TableRow>
-                <TableRow>
-                    <TableCell>
-                        <a
-                            href="https://www.screenscraper.fr"
-                            class="link"
-                            >Screenscraper</a
-                        >
-                    </TableCell>
-                    <TableCell>Visual (Image & Video) media</TableCell>
-                </TableRow>
-                <TableRow>
-                    <TableCell>
-                        <a
-                            href="https://retroachievements.org"
-                            class="link"
-                            >RetroAchievements</a
-                        >
-                    </TableCell>
-                    <TableCell>Retro game achievements</TableCell>
-                </TableRow>
-                <TableRow>
-                    <TableCell>
-                        <a
-                            href="https://www.steamgriddb.com"
-                            class="link"
-                            >SteamGridDB</a
-                        >
-                    </TableCell>
-                    <TableCell>Images for front-end presentation</TableCell>
-                </TableRow>
-                <TableRow>
-                    <TableCell>
-                        <a
-                            href="https://howlongtobeat.com"
-                            class="link"
-                            >HowLongToBeat</a
-                        >
-                    </TableCell>
-                    <TableCell>Game & playtime tracking</TableCell>
-                </TableRow>
-            </TableBody>
-        </Table>
-    </div>
+    {@render table(databases)}
+    <h2 class="header2">
+        File Hashing / Checksums
+    </h2>
+    <p class="text">
+        File hashing is a method of generating a unique fingerprint (called a
+        hash or checksum) from a file's data using an algorithm. Any change in
+        the file data produces a different hash. Users can ensure any
+        file they have is accurate simply by comparing the hash string to a
+        known good hash without redownloading a file in its entirety.
+    </p>
+    <p class="text">
+        File hashing is extremely beneficial with ROM files, allowing users
+        to validate their ROM files against known good databases regardless of
+        file-naming scheme. Hashing is also used to validate base ROMs to
+        ensure ROM patches are applied only to ROMs that will work.
+    </p>
+    <p class="text">
+        Preservation groups maintain databases of accurate ROM file hashes
+        without distributing ROMs themselves. This lets them serve as stable
+        resources since they not restricted by copyright issues (they do not
+        host ROMs) or data storage costs (file hashes are short text strings).
+    </p>
+    <p class="text">
+        For reference, consider Paper Mario: The Thousand-Year Door for 
+        Gamecube.
+    </p>
+    <ol class="list-bulleted">
+        <li>The uncompressed <code class="inline-code">.iso</code> file is
+        1,459,978,240B or ~1.36GiB</li>
+        <li>The compressed <code class="inline-code">.rvz</code> file can be
+        330,493,036B or ~315.2MiB</li>
+        <li>Common file hashes are 
+            <code class="inline-code">CRC32=0477b085</code> or 8B,
+            <code class="inline-code">
+                MD5=e30d573cf8a53f22c6c5bb355c0cfd61</code> or 32B, 
+            <code class="inline-code">
+                SHA-1=1fbb7eaa7b4188c96f1019bac43439c972ba6758</code> or 40B
+        </li>
+    </ol>
+    <p class="text">
+        Recommended file hashing tools are:
+    </p>
+    {@render table(hashers)}
 </div>

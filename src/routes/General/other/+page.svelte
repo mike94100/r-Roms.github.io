@@ -10,7 +10,6 @@
     } from "$lib/components/ui/table/index.js";
 </script>
 
-<!-- Home page for the ROMs megathread -->
 <div class="page-container">
     <h1 class="header1">
         Other Information

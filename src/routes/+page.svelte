@@ -15,8 +15,11 @@
         at the top of the page to navigate the site for all information.
     </p>
     <p class="text">
-        <a href="./General/downloads" class="link"
-        >For information on standard downloads</a>
+        It is recommended to review the information in the
+        <code class="inline-code">
+            General
+        </code>
+        section of the megathread to address common questions.
     </p>
     <h2 class="header2">
         Issues

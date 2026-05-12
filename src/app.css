@@ -164,6 +164,10 @@
         @apply font-bold leading-7 [&:not(:first-child)]:mt-6;
     }
 
+    .text-note {
+        @apply text-muted-foreground leading-7 [&:not(:first-child)]:mt-6;
+    }
+
     .link {
         @apply text-primary font-medium underline underline-offset-4 md:text-base hover:bg-primary hover:text-primary-foreground transition-colors;
     }
@@ -174,6 +178,10 @@
   
     .list-numbered {
         @apply my-6 ml-6 list-decimal [&>li]:mt-2;
+    }
+
+    .list-bulleted {
+        @apply my-6 ml-6 list-disc [&>li]:mt-2;
     }
 
     .table-container {
