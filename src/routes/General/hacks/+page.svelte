@@ -1,21 +1,8 @@
 <script lang="ts">
+    import type { Link } from "$lib/types.ts";
     import { resolve } from "$app/paths";
-    import {
-        Table,
-        TableBody,
-        TableCell,
-        TableHead,
-        TableHeader,
-        TableRow,
-    } from "$lib/components/ui/table/index.js";
 
-    interface Sites {
-        name: string;
-        url: string;
-        description?: string;
-    }
-
-    const sites: Sites[] = [
+    const sites: Link[] = [
         {
             name: "Hackdex",
             url: "https://hackdex.app",
@@ -50,6 +37,19 @@
     ]
 </script>
 
+{#snippet listBulleted(items: Link[])}
+    <ul class="list-bulleted">
+    {#each items as item}
+        <li>
+            <a href={item.url} class="link">{item.name}</a>
+            {#if item.description}
+                <br><span class="text-note">{@html item.description}</span>
+            {/if}
+        </li>
+    {/each}
+    </ul>
+{/snippet}
+
 <div class="page-container">
     <h1 class="header1">
         ROM Hacks & Patching
@@ -71,16 +71,7 @@
     <h2 class="header2">
         Sites
     </h2>
-    <ul class="list-bulleted">
-        {#each sites as site}
-            <li>
-                <a href={site.url} class="link">{site.name}</a>
-                {#if site.description}
-                    <br><span class="text-note">{site.description}</span>
-                {/if}
-            </li>
-        {/each}
-    </ul>
+    {@render listBulleted(sites)}
     <h2 class="header2">
         Pre-patched ROMs
     </h2>

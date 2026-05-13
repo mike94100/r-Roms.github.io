@@ -1,26 +1,7 @@
 <script lang="ts">
-    import { base } from "$app/paths";
-    import {
-        Table,
-        TableBody,
-        TableCell,
-        TableHead,
-        TableHeader,
-        TableRow,
-    } from "$lib/components/ui/table/index.js";
+    import type { Link } from "$lib/types.ts";
 
-    interface Sites {
-        name: string;
-        url: string;
-        description?: string;
-    }
-
-    const heading: String[] = [
-        "Name",
-        "Description"
-    ]
-
-    const databases: Sites[] = [
+    const databases: Link[] = [
         {
             name: "No-Intro",
             url: "https://no-intro.org",
@@ -71,7 +52,7 @@
         },
     ]
 
-    const hashers: Sites[] = [
+    const hashers: Link[] = [
         {
             name: "emn178's Online Tools",
             url: "https://emn178.github.io/online-tools/md5_checksum.html",
@@ -79,31 +60,19 @@
     ]
 </script>
 
-{#snippet table(items: Sites[])}
-<div class="table-container">
-    <Table>
-        <TableHeader>
-            <TableRow>
-                {#each heading as h}
-                    <TableHead>{h}</TableHead>
-                {/each}
-            </TableRow>
-        </TableHeader>
-        <TableBody>
-            {#each items as item}
-                <TableRow>
-                    <TableCell>
-                        <a href={item.url} class="link">{item.name}</a>
-                    </TableCell>
-                    <TableCell>{item.description}</TableCell>
-                </TableRow>
-            {/each}
-        </TableBody>
-    </Table>
-</div>
+{#snippet listBulleted(items: Link[])}
+    <ul class="list-bulleted">
+    {#each items as item}
+        <li>
+            <a href={item.url} class="link">{item.name}</a>
+            {#if item.description}
+                <br><span class="text-note">{@html item.description}</span>
+            {/if}
+        </li>
+    {/each}
+    </ul>
 {/snippet}
 
-<!-- Home page for the ROMs megathread -->
 <div class="page-container">
     <h1 class="header1">
         Preservation
@@ -117,7 +86,12 @@
         ensure users can verify files for emulation and provide various types
         of metadata and media for presentation.
     </p>
-    {@render table(databases)}
+    <p class="text">
+        Collections often refer to one of the below databases, typically
+        No-Intro or Redump, to denote that the ROMs or BIOS files have been
+        verified for accuracy with that database.
+    </p>
+    {@render listBulleted(databases)}
     <h2 class="header2">
         File Hashing / Checksums
     </h2>
@@ -160,5 +134,5 @@
     <p class="text">
         Recommended file hashing tools are:
     </p>
-    {@render table(hashers)}
+    {@render listBulleted(hashers)}
 </div>

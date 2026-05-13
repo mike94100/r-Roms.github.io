@@ -42,78 +42,15 @@
     <h2 class="header2">
         Additional Information
     </h2>
-    <h3 class="header3">
-        "No-Intro" and "Redump"
-    </h3>
-    <p class="text">
-        No-Intro and Redump are groups that catalog hashes of dumped games for
-        many systems. If "No-Intro" or "Redump" is present in the name of a
-        group of links, it is a collection of the currently best-available ROMs
-        for the system.
-    </p>
-    <h3 class="header3">
-        Locked Internet Archive Items
-    </h3>
-    <p class="text">
-        Internet Archive restricts items that contain high-risk content or
-        generate a high amount of traffic from being able to be downloaded
-        without an account to decrease the likelihood of takedowns and to
-        prevent abuse. This is shown with a lock icon beside the file name in
-        the item's file listing.
-        To download locked items or files, register an
-        <a
-            href="https://archive.org/account/signup"
-            class="link"
-            >Internet Archive account</a
-        > or download it from Minerva instead.
-    </p>
-    <h3 class="header3">
-        Internet Archive Metadata
-    </h3>
-    <p class="text">
-        Internet Archive items have metadata files that end in extensions such
-        as <code
-            class="inline-code"
-        >
-            .xml
-        </code>
-        and
-        <code
-            class="inline-code"
-        >
-            .sqlite
-        </code>. These files are not important to download but are meant for the
-        website to know what files to display and the reviews of the item.
-    </p>
-    <h3 class="header3">
-        Internet Archive Torrents
-    </h3>
-    <p class="text">
-        Some Internet Archive items contain torrent files as another download
-        method. However, the torrent's file listing is usually incomplete
-        compared to what is listed on the website. For this reason, it is
-        recommended to use direct downloads with a download manager instead of
-        torrents.
-    </p>
-    <h3 class="header3">
-        Archive File Types (ZIP, 7z, RAR)
-    </h3>
-    <p class="text">
-        ZIP, 7z, and RAR are archive file types which means they must be
-        extracted. 7-Zip is recommended for extracting these files.
-        Download and install it <a
-            href="https://www.7-zip.org/"
-            class="link"
-            >here</a
-        >
-        and run it. Then, open the archive file in 7-Zip or right click on it and
-        go to <br />
-        <code
-            class="inline-code"
-        >
-            7-Zip -> Extract Files
-        </code>.
-    </p>
+    <ul class="list-bulleted">
+        <li>Internet Archive files with a lock icon beside the name require an
+        account to download.</li>
+        <li><code class=.inline-code>.zip</code> and
+            <code class=.inline-code>.7z</code>,
+            among others, are common archive file types. These may require
+            extracting the underlying files to use, typically for very large or
+            disc-based games</li>
+    </ul>
     <h2 class="header2">
         Designer Shoutout
     </h2>

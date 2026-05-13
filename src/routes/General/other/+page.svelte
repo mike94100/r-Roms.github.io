@@ -1,14 +1,31 @@
 <script lang="ts">
-    import { base } from "$app/paths";
-    import {
-        Table,
-        TableBody,
-        TableCell,
-        TableHead,
-        TableHeader,
-        TableRow,
-    } from "$lib/components/ui/table/index.js";
+    import type { Link } from "$lib/types.ts";
+
+    const browsers: Link[] = [
+        { name: "Vivaldi", url: "https://vivaldi.com" },
+        { name: "Brave", url: "https://brave.com" },
+        { name: "Helium", url: "https://helium.computer" },
+    ]
+
+    const extensions: Link[] = [
+        { name: "uBlock Origin - Firefox", url: "https://addons.mozilla.org/en-US/android/addon/ublock-origin/" },
+        { name: "uBlock Origin - Chrome", url: "https://chrome.google.com/webstore/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm?hl=en" },
+        { name: "uBlock Origin - Opera", url: "https://addons.opera.com/en/extensions/details/ublock/" },
+    ]
 </script>
+
+{#snippet listBulleted(items: Link[])}
+    <ul class="list-bulleted">
+    {#each items as item}
+        <li>
+            <a href={item.url} class="link">{item.name}</a>
+            {#if item.description}
+                <br><span class="text-note">{@html item.description}</span>
+            {/if}
+        </li>
+    {/each}
+    </ul>
+{/snippet}
 
 <div class="page-container">
     <h1 class="header1">
@@ -20,83 +37,19 @@
     <p class="text">
         An adblocker is recommended when accessing certain links on this
         megathread and the Internet in general. This can be installed as
-        an extension in your browser. Some browsers come with an adblocker
-        integrated.
+        an extension in your browser or integrated into the browser.
     </p>
-    <div class="table-container">
-        <Table>
-            <TableHeader>
-                <TableRow>
-                    <TableHead>Browser</TableHead>
-                    <TableHead>Extension</TableHead>
-                    <TableHead>Links</TableHead>
-                </TableRow>
-            </TableHeader>
-            <TableBody>
-                <TableRow>
-                    <TableCell>
-                        <a
-                            href="https://vivaldi.com"
-                            class="link"
-                            >Vivaldi</a
-                        >
-                    </TableCell>
-                    <TableCell></TableCell><TableCell></TableCell>
-                </TableRow>
-                <TableRow>
-                    <TableCell>
-                        <a
-                            href="https://brave.com"
-                            class="link"
-                            >Brave</a
-                        >
-                    </TableCell>
-                    <TableCell></TableCell><TableCell></TableCell>
-                </TableRow>
-                <TableRow>
-                    <TableCell>
-                        <a
-                            href="https://helium.computer"
-                            class="link"
-                            >Helium</a
-                        >
-                    </TableCell>
-                    <TableCell></TableCell><TableCell></TableCell>
-                </TableRow>
-                <TableRow>
-                    <TableCell></TableCell>
-                    <TableCell>
-                        <a
-                            href="https://ublockorigin.com"
-                            class="link"
-                            >uBlock Origin</a
-                        >
-                    </TableCell>
-                    <TableCell>
-                        <a
-                            href="https://chrome.google.com/webstore/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm?hl=en"
-                            class="link"
-                            >Chrome</a
-                        >
-                        <a
-                            href="https://addons.mozilla.org/en-US/android/addon/ublock-origin/"
-                            class="link"
-                            >Firefox</a
-                        >
-                        <a
-                            href="https://addons.opera.com/en/extensions/details/ublock/"
-                            class="link"
-                            >Opera</a
-                        >
-                    </TableCell>
-                </TableRow>
-            </TableBody>
-        </Table>
-    </div>
+    <h3 class="header3">
+        Browsers
+    </h3>
+    {@render listBulleted(browsers)}
+    <h2 class="header2">
+        Extensions
+    </h2>
+    {@render listBulleted(extensions)}
     <p class="text">
         For Android: Download Firefox from the Play Store, locate the Addons
-        menu and select uBlock Origin. Add it to Firefox and remember to only
-        use Firefox to download ROMs.
+        menu and select uBlock Origin and add it to Firefox.
     </p>
     <h2 class="header2">
         Bypassing Download Limits
@@ -105,32 +58,23 @@
         Google Drive
     </h3>
     <p class="text">
-        From time to time when trying to download a file, you may see an
-        error message saying “Download quota exceeded, so you can’t download
-        this file at this time”. The steps to bypass the download quota limit
-        are as follows:
+        When downloading you may see the error message
+        <code class="inline-code">Download quota exceeded, so you can't download
+        this file at this time</code>.
+        The steps to bypass the download quota limit are:
     </p>
 
     <ol class="list-numbered">
-        <li>
-            Sign in to your Google account or create one, if you have not
-            already.
-        </li>
-        <li>Open Google Drive and go to “My Drive” in the sidebar.</li>
-        <li>Make a new folder. It does not matter what you name it.</li>
-        <li>
-            Go to the quota'd folder, right click on the file you want to
-            download, and click “Add Shortcut to Drive”.
-        </li>
-        <li>
-            Navigate to “My Drive” and then to the folder you made, and click
-            “Add Shortcut”.
-        </li>
-        <li>
-            Go to “My Drive” on the sidebar. Right-click the folder you made and
-            click “Download”.
-        </li>
-        <li>A .zip file with the file(s) you selected starts downloading.</li>
+        <li>Sign in to your Google account or create one</li>
+        <li>Open Google Drive and go to “My Drive” in the sidebar</li>
+        <li>Make a new folder with any name</li>
+        <li>Go to the quota'd folder, right click on a file to download,
+            and click “Add Shortcut to Drive”.</li>
+        <li>Navigate to “My Drive”, then the new folder, then
+            click “Add Shortcut”.</li>
+        <li>Go to “My Drive” on the sidebar, right-click the folder and
+            click “Download”.</li>
+        <li>A .zip file with the file(s) you selected will download</li>
     </ol>
     <h3 class="header3">
         MEGA

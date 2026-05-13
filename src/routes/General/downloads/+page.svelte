@@ -1,16 +1,54 @@
 <script lang="ts">
-    import { base } from "$app/paths";
-    import {
-        Table,
-        TableBody,
-        TableCell,
-        TableHead,
-        TableHeader,
-        TableRow,
-    } from "$lib/components/ui/table/index.js";
+    import type { Link } from "$lib/types.ts";
+
+    const sites: Link[] = [
+        {
+            name: "Free Media Heck Yeah",
+            url: "https://fmhy.net/gaming#rom-sites",
+            description: "A large collection of sites related to acquiring free media of all types."
+        },
+        {
+            name: "Vimm's Lair",
+            url: "https://vimm.net",
+            description: "Provides files up to the 3DS/PS3. Restricted to one download at a time."
+        },
+        {
+            name: "Internet Archive",
+            url: "https://archive.org",
+            description: "Files with a lock icon require a free account to " +
+            "download.<br><br>" +
+            "Hosted collections have metadata files with extensions " +
+            "<code class=\"inline-code\">.xml</code> and " +
+            "<code class=\"inline-code\">.sqlite</code>. " +
+            "These files are used by Internet Archive to store information " +
+            "about the collections but are not needed by end users.<br><br>" +
+            "Some collections are available for torrenting with the " +
+            "<code class=\"inline-code\">.torrent</code> " +
+            "file, but this is not recommended as the torrent's file list " +
+            "is often incomplete compared to downloading from the website."
+        },
+        { name: "Edge Emulation", url: "https://edgeemu.net" },
+        { name: "StartGame", url: "https://startgame.world" },
+    ];
+    const managers: Link[] = [
+        { name: "AB Download Manager", url: "https://abdownloadmanager.com" },
+        { name: "JDownloader2", url: "https://jdownloader.org/jdownloader2" },
+    ];
 </script>
 
-<!-- Home page for the ROMs megathread -->
+{#snippet listBulleted(items: Link[])}
+    <ul class="list-bulleted">
+    {#each items as item}
+        <li>
+            <a href={item.url} class="link">{item.name}</a>
+            {#if item.description}
+                <br><span class="text-note">{@html item.description}</span>
+            {/if}
+        </li>
+    {/each}
+    </ul>
+{/snippet}
+
 <div class="page-container">
     <h1 class="header1">
         Direct Downloads
@@ -23,101 +61,7 @@
     <h2 class="header2">
         Sites
     </h2>
-    <div class="table-container">
-        <Table>
-            <TableHeader>
-                <TableRow>
-                    <TableHead>Name</TableHead>
-                    <TableHead>Notes</TableHead>
-                </TableRow>
-            </TableHeader>
-            <TableBody>
-                <TableRow>
-                    <TableCell>
-                        <a
-                            href="https://fmhy.net/gaming#rom-sites"
-                            class="link"
-                            >FMHY</a
-                        >                        
-                    </TableCell>
-                    <TableCell>
-                        A large collection of sites related to acquiring free media of all types.
-                    </TableCell>
-                </TableRow>
-                <TableRow>
-                    <TableCell>
-                        <a
-                            href="https://vimm.net"
-                            class="link"
-                            >Vimm's Lair</a
-                        >  
-                    </TableCell>
-                    <TableCell>
-                        Provides files up to the 3DS/PS3. Restricted to one download at a time.
-                    </TableCell>
-                </TableRow>
-                <TableRow>
-                    <TableCell>
-                        <a
-                            href="https://archive.org"
-                            class="link"
-                            >Internet Archive</a
-                        >  
-                    </TableCell>
-                    <TableCell>
-                        High-risk and traffic content cannot be is locked to
-                        minimize takedowns and abuse. These files are shown
-                        with a lock icon beside the file name in the item's
-                        file listing. A free account is required to unlock
-                        them.<br><br>
-                        Items hosted by the Internet Archive have metadata
-                        files ending in extensions such as
-                        <code
-                            class="inline-code">
-                            .xml
-                        </code>
-                        and
-                        <code
-                            class="inline-code">
-                            .sqlite
-                        </code>.
-                        These files are not important to download but are used
-                        by the website to store information about the item and
-                        the files the items contain.<br><br>
-                        Some Internet Archive items are available for
-                        torrenting by downloading the
-                        <code
-                            class="inline-code">
-                            .torrent
-                        </code>
-                        file. However this is not recommended as the torrent's
-                        file list is usually incomplete compared to downloading
-                        directly from the website.
-                    </TableCell>
-                </TableRow>
-                <TableRow>
-                    <TableCell>
-                        <a
-                            href="https://edgeemu.net"
-                            class="link"
-                            >Edge Emulation</a
-                        >  
-                    </TableCell>
-                    <TableCell></TableCell>
-                </TableRow>
-                <TableRow>
-                    <TableCell>
-                        <a
-                            href="https://startgame.world"
-                            class="link"
-                            >StartGame</a
-                        >  
-                    </TableCell>
-                    <TableCell></TableCell>
-                </TableRow>
-            </TableBody>
-        </Table>
-    </div>
+    {@render listBulleted(sites)}
     <h2 class="header2">
         Download Managers
     </h2>
@@ -128,36 +72,5 @@
         connections, resumable downloads, link grabbing, bulk downloads,
         artificial speed limits, post-download actions, and more.
     </p>
-    <div class="table-container">
-        <Table>
-            <TableHeader>
-                <TableRow>
-                    <TableHead>Name</TableHead>
-                    <TableHead>Notes</TableHead>
-                </TableRow>
-            </TableHeader>
-            <TableBody>
-                <TableRow>
-                    <TableCell>
-                        <a
-                            href="https://abdownloadmanager.com"
-                            class="link"
-                            >AB Download Manager</a
-                        >                        
-                    </TableCell>
-                    <TableCell></TableCell>
-                </TableRow>
-                <TableRow>
-                    <TableCell>
-                        <a
-                            href="https://jdownloader.org/jdownloader2"
-                            class="link"
-                            >JDownloader2</a
-                        >  
-                    </TableCell>
-                    <TableCell></TableCell>
-                </TableRow>
-            </TableBody>
-        </Table>
-    </div>
+    {@render listBulleted(managers)}
 </div>

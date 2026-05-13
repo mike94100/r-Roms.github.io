@@ -1,16 +1,68 @@
 <script lang="ts">
-    import { base } from "$app/paths";
-    import {
-        Table,
-        TableBody,
-        TableCell,
-        TableHead,
-        TableHeader,
-        TableRow,
-    } from "$lib/components/ui/table/index.js";
+    import type { Link } from "$lib/types.ts";
+
+    const sites: Link[] = [
+        {
+            name: "Free Media Heck Yeah",
+            url: "https://fmhy.net/gaming#rom-sites",
+            description: "A large collection of sites related to acquiring " +
+            "free media of all types."
+        },
+        {
+            name: "Minerva Archive",
+            url: "https://minerva-archive.org",
+            description: "A torrent-based mirror of the original Myrient " +
+            "archive. Torrents are provided as large collections of ROMs. " +
+            "Your torrent client should be capable of selecting specific " +
+            "files to download.<br>" +
+            "<a href='https://discord.com/invite/MiNERVA-archive' " +
+            "class='link'>Discord</a><br>" +
+            "<a href='https://cdn.minerva-archive.org/torrents/' " +
+            "class='link'>Torrent Index</a>"
+        }
+    ]
+
+    const clients: Link[] = [
+        {
+            name: "qBittorrent",
+            url: "https://www.qbittorrent.org",
+            description: "Windows, MacOS, Linux"
+        },
+        {
+            name: "LibreTorrent",
+            url: "https://gitlab.com/proninyaroslav/libretorrent",
+            description: "Android"
+        }
+    ]
+
+    const vpn: Link[] = [
+        { name: "AirVPN", url: "https://airvpn.org" },
+        { name: "Windscribe", url: "https://windscribe.net" },
+        { name: "ProtonVPN", url: "https://protonvpn.com" },
+    ]
+
+    const seedbox: Link[] = [
+        { name: "Seedr", url: "https://www.seedr.cc" },
+    ]
+
+    const debrid: Link[] = [
+        { name: "Torbox", url: "https://torbox.app" },
+    ]
 </script>
 
-<!-- Home page for the ROMs megathread -->
+{#snippet listBulleted(items: Link[])}
+    <ul class="list-bulleted">
+    {#each items as item}
+        <li>
+            <a href={item.url} class="link">{item.name}</a>
+            {#if item.description}
+                <br><span class="text-note">{@html item.description}</span>
+            {/if}
+        </li>
+    {/each}
+    </ul>
+{/snippet}
+
 <div class="page-container">
     <h1 class="header1">
         Torrents
@@ -24,55 +76,7 @@
     <h2 class="header2">
         Sites
     </h2>
-    <div class="table-container">
-        <Table>
-            <TableHeader>
-                <TableRow>
-                    <TableHead>Website</TableHead>
-                    <TableHead>Notes</TableHead>
-                </TableRow>
-            </TableHeader>
-            <TableBody>
-                <TableRow>
-                    <TableCell>
-                        <a
-                            href="https://fmhy.net/gaming#rom-sites"
-                            class="link"
-                            >FMHY</a
-                        >                        
-                    </TableCell>
-                    <TableCell>
-                        A large collection of sites related to acquiring free media of all types.
-                    </TableCell>
-                </TableRow>
-                <TableRow>
-                    <TableCell>
-                        <a
-                            href="https://minerva-archive.org"
-                            class="link"
-                            >Minerva</a
-                        >
-                    </TableCell>
-                    <TableCell>
-                        A torrent-based mirror of the original Myrient archive.
-                        Torrents are provided as larger collections. Your
-                        client should be capable of individually selecting
-                        files to download.<br>
-                        <a
-                            href="https://discord.com/invite/MiNERVA-archive"
-                            class="link"
-                            >Discord</a
-                        ><br>
-                        <a
-                            href="https://cdn.minerva-archive.org/torrents/"
-                            class="link"
-                            >Minerva Torrent Index</a
-                        >  
-                    </TableCell>
-                </TableRow>
-            </TableBody>
-        </Table>
-    </div>
+    {@render listBulleted(sites)}
     <h2 class="header2">
         What is a Torrent
     </h2>
@@ -113,7 +117,7 @@
         they are enforced. You should research your laws or find a trusted
         community to ensure you do not face any repercussions.
     </p>
-    <p class="text-emphasis">
+    <p class="text">
         VPNs help prevent a copyright holder from logging your public IP
         Address when accessing the torrent swarm and notifying your Internet
         Service Provider (ISP). In the United States, this is known as a DMCA
@@ -123,10 +127,6 @@
     <h3 class="header3">
         Considerations
     </h3>
-    <p class="text-emphasis">
-        There is no recommended free VPN Provider. You should always pay for
-        one if needed.
-    </p>
     <p class="text">
         If you require a VPN, it is essentially required to setup your torrent
         client to be "bound" to the VPN network. This forces your client to
@@ -145,13 +145,17 @@
         you will only be able to connect to users who do port forward. This
         will impact the availability and speed of downloads and seeding.
     </p>
+    <p class="text">
+        There is no recommended free VPN Provider. You should always pay for
+        one if needed.
+    </p>
     <h2 class="header2">
         Seedboxes
     </h2>
     <p class="text">
         Seedboxes are remote servers that provide high-bandwidth connections
         and storage. They provide a web interface for a torrent client, and
-        allow you to directly download files you have downloaded via torrent.
+        allow you to directly download files you have downloaded on the server.
         Seedboxes can replace both VPN and local torrent client.
     </p>
     <h2 class="header2">
@@ -168,22 +172,11 @@
         Summary
     </h2>
     <ol class="list-numbered">
-        <li>
-            A torrent client is required to connect to a swarm for file transfer
-        </li>
-        <li>
-            You may require a VPN to connect safely, depending on your location
-        </li>
-        <li>
-            If you require a VPN, you must bind your client to use the VPN network
-        </li>
-        <li>
-            It is recommended to use a VPN provider that allows for port forwarding
-            and ensure it is setup correctly
-        </li>
-        <li>
-            It is never recommended to use a free VPN.
-        </li>
+        <li>A torrent client is needed to connect to a torrent swarm</li>
+        <li>A VPN may be needed to connect without issue, depending on location</li>
+        <li>If a VPN is needed, bind your client to use the VPN network</li>
+        <li>It is recommended to use a VPN provider that allows for port forwarding</li>
+        <li>It is not recommended to use a free VPN</li>
     </ol>
     <h2 class="header2">
         Recommendations
@@ -191,147 +184,17 @@
     <h3 class="header3">
         Torrent Clients
     </h3>
-    <div class="table-container">
-        <Table>
-            <TableHeader>
-                <TableRow>
-                    <TableHead>Name</TableHead>
-                    <TableHead>Supported Systems</TableHead>
-                </TableRow>
-            </TableHeader>
-            <TableBody>
-                <TableRow>
-                    <TableCell>
-                        <a
-                            href="https://www.qbittorrent.org"
-                            class="link"
-                            >qBittorrent</a
-                        >                        
-                    </TableCell>
-                    <TableCell>
-                        Windows, MacOS, Linux
-                    </TableCell>
-                </TableRow>
-                <TableRow>
-                    <TableCell>
-                        <a
-                            href="https://gitlab.com/proninyaroslav/libretorrent"
-                            class="link"
-                            >LibreTorrent</a
-                        >  
-                    </TableCell>
-                    <TableCell>
-                        Android
-                    </TableCell>
-                </TableRow>
-            </TableBody>
-        </Table>
-    </div>
+    {@render listBulleted(clients)}
     <h3 class="header3">
         VPN Providers
     </h3>
-    <div class="table-container">
-        <Table>
-            <TableHeader>
-                <TableRow>
-                    <TableHead>Name</TableHead>
-                    <TableHead>Supported Systems</TableHead>
-                    <TableHead>Port Forwarding</TableHead>
-                    <TableHead>Protocols</TableHead>
-                </TableRow>
-            </TableHeader>
-            <TableBody>
-                <TableRow>
-                    <TableCell>
-                        <a
-                            href="https://airvpn.org"
-                            class="link"
-                            >AirVPN</a
-                        >                        
-                    </TableCell>
-                    <TableCell> Windows, Linux, MacOS, Android </TableCell>
-                    <TableCell> Allowed </TableCell>
-                    <TableCell> OpenVPN, Wireguard </TableCell>
-                </TableRow>
-                <TableRow>
-                    <TableCell>
-                        <a
-                            href="https://windscribe.net"
-                            class="link"
-                            >Windscribe</a
-                        >  
-                    </TableCell>
-                    <TableCell> Windows, Linux, MacOS, Android </TableCell>
-                    <TableCell> Allowed </TableCell>
-                    <TableCell> OpenVPN, Wireguard </TableCell>
-                </TableRow>
-                <TableRow>
-                    <TableCell>
-                        <a
-                            href="https://protonvpn.com"
-                            class="link"
-                            >ProtonVPN</a
-                        >  
-                    </TableCell>
-                    <TableCell> Windows, Linux, MacOS, Android </TableCell>
-                    <TableCell> Allowed </TableCell>
-                    <TableCell> OpenVPN, Wireguard </TableCell>
-                </TableRow>
-            </TableBody>
-        </Table>
-    </div>
+    {@render listBulleted(vpn)}
     <h3 class="header3">
         Seedboxes
     </h3>
-    <div class="table-container">
-        <Table>
-            <TableHeader>
-                <TableRow>
-                    <TableHead>Name</TableHead>
-                    <TableHead>Notes</TableHead>
-                </TableRow>
-            </TableHeader>
-            <TableBody>
-                <TableRow>
-                    <TableCell>
-                        <a
-                            href="https://www.seedr.cc"
-                            class="link"
-                            >Seedr</a
-                        >                        
-                    </TableCell>
-                    <TableCell>
-                        TBD
-                    </TableCell>
-                </TableRow>
-            </TableBody>
-        </Table>
-    </div>
+    {@render listBulleted(seedbox)}
     <h3 class="header3">
         Debrid Services
     </h3>
-    <div class="table-container">
-        <Table>
-            <TableHeader>
-                <TableRow>
-                    <TableHead>Name</TableHead>
-                    <TableHead>Notes</TableHead>
-                </TableRow>
-            </TableHeader>
-            <TableBody>
-                <TableRow>
-                    <TableCell>
-                        <a
-                            href="https://torbox.app"
-                            class="link"
-                            >Torbox</a
-                        >                        
-                    </TableCell>
-                    <TableCell>
-                        TBD
-                    </TableCell>
-                </TableRow>
-            </TableBody>
-        </Table>
-    </div>
+    {@render listBulleted(debrid)}
 </div>
